@@ -1,0 +1,177 @@
+/* ===========================================================
+   GALLON · CASCALHEIRA — MOBILE LAYER
+   Adapta 100% do conteúdo desktop para telas pequenas.
+   Nada é removido: tudo é reempilhado, reescalado e reordenado.
+   Carregado DEPOIS de gallon.css.
+   =========================================================== */
+
+/* ---------------------------------------------------------
+   TABLET / PHABLET  (≤ 720px)
+   --------------------------------------------------------- */
+@media (max-width:720px){
+  :root{ --gut:20px; }
+
+  /* respiro vertical mais curto */
+  .section{ padding-block:clamp(48px,11vw,72px); }
+  .section--tight{ padding-block:clamp(38px,9vw,58px); }
+
+  /* tipografia: títulos confiantes mas nunca gigantes */
+  .display{ font-size:clamp(1.95rem,8.4vw,2.9rem); line-height:1.04; }
+  .h2{ font-size:clamp(1.55rem,6.6vw,2.2rem); line-height:1.08; }
+  .h3{ font-size:1.18rem; }
+  .lead{ font-size:1.02rem; }
+  .body{ font-size:1rem; }
+  .section-head{ margin-bottom:34px; }
+
+  /* botões: largura total e alvo de toque ≥ 52px */
+  .btn{ width:100%; padding:1.05em 1.4em; }
+  .btn-row{ gap:12px; }
+  .btn-row .btn{ width:100%; }
+}
+
+/* ---------------------------------------------------------
+   PHONE  (≤ 600px)  — reempilhamento principal
+   --------------------------------------------------------- */
+@media (max-width:600px){
+
+  /* ---- HEADER ---- */
+  .site-head__bar{ height:64px; }
+  .brand img{ height:30px; }
+  .burger{ width:42px; height:42px; }
+  .mobile-nav{ inset:64px 0 0 0; padding:26px var(--gut) 40px; overflow-y:auto; }
+  .mobile-nav a{ font-size:1.35rem; padding:16px 0; }
+
+  /* ---- HOME hero ---- */
+  .hero__grid{ gap:26px; padding-block:32px 0; }
+  .hero .display{ margin-top:16px; }
+  .hero .lead{ margin-top:18px; }
+  .hero__support{ margin-top:14px; font-size:.96rem; }
+  .hero .btn-row{ margin-top:26px; }
+  .hero__media{ max-width:none; margin-top:4px; }
+  .hero__panel{ aspect-ratio:4/3; clip-path:polygon(8% 0,100% 0,100% 100%,0 100%); }
+  .hero__tag{ bottom:18px; padding:11px 16px; font-size:.8rem; }
+  .hero__strip{ margin-top:8px; }
+  .hero__strip-in{ gap:10px 26px; padding-block:15px; }
+  .hero__strip-in span{ font-size:.68rem; padding-left:16px; }
+  .hero__strip-in span::before{ width:7px; height:7px; }
+
+  /* ---- NÚMEROS (home) ---- */
+  .nums__grid{ margin-top:26px; }
+  .numbox{ padding:26px 0 4px; }
+  .stat__num{ font-size:clamp(2.6rem,15vw,3.6rem); }
+  .stat__lab{ font-size:.9rem; }
+
+  /* ---- DIFERENCIAIS ---- */
+  .diffs__head{ margin-bottom:32px; }
+  .card{ padding:26px 22px; }
+
+  /* ---- QUEM ATENDEMOS ---- */
+  .serve__list li{ font-size:1.08rem; gap:16px; padding:18px 0; align-items:flex-start; }
+  .serve__plus{ width:34px; height:34px; font-size:1.2rem; }
+  .serve__left .btn{ margin-top:26px; }
+
+  /* ---- CTA band ---- */
+  .cta-band__in{ gap:24px; }
+  .cta-band__sub{ font-size:1.02rem; margin-top:14px; }
+
+  /* ================= HERO · SOBRE ================= */
+  .hero-sobre__in{ gap:26px; padding-block:34px; }
+  .hero-sobre__year{
+    font-size:44vw; right:-4%; top:26px; transform:none;
+    opacity:.08; line-height:.7;
+  }
+  .hero-sobre__card{ padding:26px 24px; }
+  .hero-sobre__card .big{ font-size:2rem; }
+  .hero-sobre__tl-in{ flex-direction:column; }
+  .hero-sobre__tl-in span{
+    flex:1 1 100%; min-width:0; border-left:0;
+    border-top:1px solid var(--steel); padding:16px 0 16px 24px;
+  }
+  .hero-sobre__tl-in span:first-child{ border-top:0; }
+  .hero-sobre__tl-in span::before{ left:0; }
+
+  /* ================= HERO · PRODUTO (pdp) ================= */
+  .pdp__in{ gap:26px; padding-block:34px; }
+  .pdp__info{ max-width:none; }
+  .pdp__title{ line-height:.96; }
+  .pdp__specs{ flex-direction:column; }
+  .pdp__specs > div{
+    flex:1 1 100%; border-left:0; padding:16px 0;
+    border-top:1px solid var(--steel);
+  }
+  .pdp__specs > div:first-child{ border-top:0; padding-top:2px; }
+  .pdp__cta{ gap:18px; margin-top:28px; }
+  .pdp__cta .btn{ width:100%; }
+  .pdp__link{ width:100%; text-align:center; }
+  .pdp__media{ order:2; aspect-ratio:4/3; }
+  .pdp__media::before{ width:60px; height:60px; }
+
+  /* processo / passos + aplicações */
+  .step{ grid-template-columns:auto 1fr; gap:16px; padding:24px 0; }
+  .step__n{ font-size:2.6rem; }
+  .appcard{ padding:28px 24px; }
+  .feat{ gap:16px; padding:22px 0; }
+  .feat__mark{ width:40px; height:40px; font-size:1.3rem; }
+
+  /* ================= HERO · DEPOIMENTOS ================= */
+  .hero-dep__in{ gap:24px; padding-block:34px 6px; }
+  .hero-dep__txt{ max-width:none; }
+  .hero-dep__mark{ font-size:34vw; top:-2%; right:2%; opacity:.07; }
+  .hero-dep__trust{ margin-top:24px; }
+  .hero-dep__pull{ padding:30px 26px; animation:none; }
+  .hero-dep__pull blockquote{ font-size:1.3rem; }
+  .hero-dep__pull::after{ width:40px; height:40px; }
+
+  /* cards de depoimento + credibilidade */
+  .tcard{ padding:28px 24px; gap:18px; }
+  .tcard__q{ font-size:1.1rem; }
+  .credcard{ padding:22px 22px; gap:14px; }
+  .credcard p{ font-size:1rem; }
+
+  /* ================= ÁREA DE ATUAÇÃO ================= */
+  .area-hero__in{ padding-block:34px; }
+  .area-hero__wm{ height:auto; width:150%; right:-40%; opacity:.045; }
+
+  .areamap__wrap{ gap:20px; }
+  .areamap__side{ order:-1; padding:26px 24px 22px; }
+  .areamap__count{ font-size:3.4rem; }
+  .areamap__cities{ gap:7px; }
+  .areamap__city{ font-size:.88rem; padding:8px 12px; }
+  .areamap__note{ padding-top:20px; }
+
+  /* MAPA SVG: os rótulos ficariam ilegíveis reduzidos — viram diagrama
+     visual (base + rotas + pins) e os NOMES vivem nos chips acima. */
+  .areamap__panel{ min-height:0; }
+  .areamap__svg .plabel,
+  .areamap__svg .mp-oceanlbl{ display:none; }
+  .mp-base .blabel{ font-size:20px; }
+  .mp-base .bsub{ font-size:16px; }
+  .pin .pdot{ r:6; }
+  .pin.is-hl .pdot{ r:9; }
+  .areamap__legend{ left:14px; bottom:12px; gap:14px; font-size:.66rem; }
+
+  /* ---- FOOTER ---- */
+  .foot-grid{ gap:34px; padding-block:52px; }
+  .foot-brand img{ height:34px; }
+  .foot-bottom{ padding-block:22px; }
+  .foot-bottom p{ font-size:.8rem; }
+
+  /* ---- WhatsApp flutuante: fica compacto e não expande no toque ---- */
+  .wa-float{ right:16px; bottom:16px; }
+  .wa-float:hover{ width:58px; }
+  .wa-float span{ display:none; }
+}
+
+/* ---------------------------------------------------------
+   SMALL PHONE  (≤ 380px)  — apertos finais
+   --------------------------------------------------------- */
+@media (max-width:380px){
+  .display{ font-size:1.85rem; }
+  .h2{ font-size:1.5rem; }
+  .hero-sobre__card .big{ font-size:1.75rem; }
+  .pdp__title{ font-size:2.1rem; }
+  .hero-dep__pull blockquote{ font-size:1.18rem; }
+  .areamap__count{ font-size:3rem; }
+  .eyebrow{ font-size:.72rem; letter-spacing:.16em; }
+  .eyebrow::before{ width:26px; }
+}
