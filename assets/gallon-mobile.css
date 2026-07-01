@@ -27,6 +27,26 @@
   .btn{ width:100%; padding:1.05em 1.4em; }
   .btn-row{ gap:12px; }
   .btn-row .btn{ width:100%; }
+
+  /* Cabeçalho Sticky de Vidro */
+  .site-head {
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+    background: rgba(12, 12, 12, 0.75) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Cartões modernos com borda de vidro e cantos arredondados */
+  .card, .tcard, .credcard, .appcard, .hero-sobre__card {
+    border-radius: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background: rgba(20, 20, 20, 0.5) !important;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
 }
 
 /* ---------------------------------------------------------
@@ -38,8 +58,117 @@
   .site-head__bar{ height:64px; }
   .brand img{ height:30px; }
   .burger{ width:42px; height:42px; }
-  .mobile-nav{ inset:64px 0 0 0; padding:26px var(--gut) 40px; overflow-y:auto; }
-  .mobile-nav a{ font-size:1.35rem; padding:16px 0; }
+
+  /* Menu Mobile Premium */
+  .mobile-nav {
+    inset: 64px 0 0 0 !important;
+    padding: 24px var(--gut) 32px !important;
+    height: calc(100vh - 64px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    background: radial-gradient(circle at top right, rgba(255, 206, 0, 0.04) 0%, rgba(12, 12, 12, 0.99) 70%) !important;
+    overflow-y: auto !important;
+  }
+  .mobile-nav__links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .mobile-nav a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 16px 20px !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: 12px !important;
+    color: var(--white) !important;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+  }
+  .mobile-nav a:active {
+    background: rgba(255, 206, 0, 0.06) !important;
+    border-color: rgba(255, 206, 0, 0.2) !important;
+    transform: scale(0.98);
+  }
+  .mobile-nav a.is-active {
+    color: var(--yellow) !important;
+    background: rgba(255, 206, 0, 0.04) !important;
+    border-color: rgba(255, 206, 0, 0.25) !important;
+  }
+  .mobile-nav a::after {
+    content: "→";
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .mobile-nav a.is-active::after {
+    color: var(--yellow);
+    transform: translateX(4px);
+  }
+
+  /* Rodapé do Menu Mobile */
+  .mobile-nav__footer {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .mobile-nav__footer-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gray-dim);
+    margin-bottom: 12px;
+  }
+  .mobile-nav__contact-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .mobile-nav__contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 14px 10px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.15s, opacity 0.15s;
+    box-sizing: border-box;
+  }
+  .mobile-nav__contact-btn:active {
+    transform: scale(0.97);
+  }
+  .mobile-nav__contact-btn--phone {
+    background: var(--char);
+    border: 1px solid var(--steel);
+    color: var(--white);
+  }
+  .mobile-nav__contact-btn--wpp {
+    background: #25D366;
+    color: var(--white);
+  }
+  .mobile-nav__info {
+    font-size: 0.75rem;
+    color: var(--gray-dim);
+    line-height: 1.5;
+  }
 
   /* ---- HOME hero ---- */
   .hero__grid{ gap:26px; padding-block:32px 0; }
@@ -156,10 +285,19 @@
   .foot-bottom{ padding-block:22px; }
   .foot-bottom p{ font-size:.8rem; }
 
-  /* ---- WhatsApp flutuante: fica compacto e não expande no toque ---- */
-  .wa-float{ right:16px; bottom:16px; }
-  .wa-float:hover{ width:58px; }
-  .wa-float span{ display:none; }
+  /* ---- WhatsApp flutuante: fica compacto, não expande no toque e ganha pulso de brilho ---- */
+  @keyframes waPulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+    70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  }
+  .wa-float {
+    right: 16px;
+    bottom: 16px;
+    animation: waPulse 2s infinite;
+  }
+  .wa-float:hover { width: 58px; }
+  .wa-float span { display: none; }
 }
 
 /* ---------------------------------------------------------
