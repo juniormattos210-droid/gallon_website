@@ -1,160 +1,247 @@
 /* ===========================================================
-   GALLON · CASCALHEIRA — MOBILE LAYER
-   Adapta 100% do conteúdo desktop para telas pequenas.
-   Nada é removido: tudo é reempilhado, reescalado e reordenado.
+   GALLON · CASCALHEIRA — MOBILE LAYER v2.0
+   Redesign completo para mobile: menos texto, mais impacto.
+   Estética premium com glassmorphism, micro-animações e
+   hierarquia visual brutal.
+
+   Filosofia: cada pixel conta no mobile.
+   Identidade: #FFCE00 · #0C0C0C · Albert Sans · industrial.
+
    Carregado DEPOIS de gallon.css.
    =========================================================== */
 
 /* ---------------------------------------------------------
+   KEYFRAMES — animações leves para mobile
+   --------------------------------------------------------- */
+
+/* Staggered slide-in para menu mobile */
+@keyframes gallonSlideIn {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Fade-up suave para conteúdo */
+@keyframes gallonFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulse de brilho no WhatsApp */
+@keyframes gallonWaPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+  70%  { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Glow suave no CTA principal */
+@keyframes gallonGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 206, 0, 0); }
+  50%      { box-shadow: 0 0 20px 2px rgba(255, 206, 0, 0.12); }
+}
+
+/* ---------------------------------------------------------
    TABLET / PHABLET  (≤ 720px)
    --------------------------------------------------------- */
-@media (max-width:720px){
-  :root{ --gut:20px; }
+@media (max-width: 720px) {
+  :root { --gut: 20px; }
 
-  /* respiro vertical mais curto */
-  .section{ padding-block:clamp(48px,11vw,72px); }
-  .section--tight{ padding-block:clamp(38px,9vw,58px); }
+  /* Respiro vertical compacto */
+  .section { padding-block: clamp(40px, 9vw, 64px); }
+  .section--tight { padding-block: clamp(32px, 7vw, 48px); }
 
-  /* tipografia: títulos confiantes mas nunca gigantes */
-  .display{ font-size:clamp(1.95rem,8.4vw,2.9rem); line-height:1.04; }
-  .h2{ font-size:clamp(1.55rem,6.6vw,2.2rem); line-height:1.08; }
-  .h3{ font-size:1.18rem; }
-  .lead{ font-size:1.02rem; }
-  .body{ font-size:1rem; }
-  .section-head{ margin-bottom:34px; }
+  /* Tipografia: impactante mas controlada */
+  .display {
+    font-size: clamp(1.85rem, 7.5vw, 2.7rem);
+    line-height: 1.02;
+    letter-spacing: -.025em;
+  }
+  .h2 {
+    font-size: clamp(1.45rem, 6vw, 2.1rem);
+    line-height: 1.06;
+  }
+  .h3 { font-size: 1.12rem; }
+  .lead { font-size: 1rem; line-height: 1.55; }
+  .body { font-size: .97rem; line-height: 1.6; }
+  .section-head { margin-bottom: 28px; }
 
-  /* botões: largura total e alvo de toque ≥ 52px */
-  .btn{ width:100%; padding:1.05em 1.4em; }
-  .btn-row{ gap:12px; }
-  .btn-row .btn{ width:100%; }
+  /* Botões: touch-friendly com glow sutil */
+  .btn {
+    width: 100%;
+    padding: 1.05em 1.4em;
+    min-height: 52px;
+    border-radius: 0;
+    transition: transform .12s var(--ease), background .12s, box-shadow .3s;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-row { gap: 10px; }
+  .btn-row .btn { width: 100%; }
 
-  /* Cabeçalho Sticky de Vidro */
+  /* Glass header */
   .site-head {
     position: sticky !important;
     top: 0;
     z-index: 100;
-    background: rgba(12, 12, 12, 0.75) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(12, 12, 12, 0.72) !important;
+    backdrop-filter: blur(16px) saturate(1.4) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(1.4) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
-  /* Cartões modernos com borda de vidro e cantos arredondados */
-  .card, .tcard, .credcard, .appcard, .hero-sobre__card {
-    border-radius: 16px !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    background: rgba(20, 20, 20, 0.5) !important;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  /* Cards premium com glass effect */
+  .card,
+  .tcard,
+  .credcard,
+  .appcard,
+  .hero-sobre__card,
+  .statement {
+    border-radius: 14px !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background: rgba(20, 20, 20, 0.6) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+    transition: transform .15s var(--ease), box-shadow .15s;
   }
+  .card:active,
+  .tcard:active {
+    transform: scale(.985) !important;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  }
+  /* Desativar hover lift em touch */
+  .card:hover,
+  .tcard:hover { transform: none; }
 }
 
+
 /* ---------------------------------------------------------
-   PHONE  (≤ 600px)  — reempilhamento principal
+   PHONE  (≤ 600px)  — redesign principal
    --------------------------------------------------------- */
-@media (max-width:600px){
+@media (max-width: 600px) {
 
-  /* ---- HEADER ---- */
-  .site-head__bar{ height:64px; }
-  .brand img{ height:30px; }
-  .burger{ width:42px; height:42px; }
+  /* ========================================
+     HEADER COMPACTO
+     ======================================== */
+  .site-head__bar { height: 60px; }
+  .brand img { height: 28px; }
+  .burger {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+  }
 
-  /* Menu Mobile Premium */
+  /* ========================================
+     MENU MOBILE PREMIUM
+     ======================================== */
   .mobile-nav {
-    inset: 64px 0 0 0 !important;
-    padding: 24px var(--gut) 32px !important;
-    height: calc(100vh - 64px) !important;
+    inset: 60px 0 0 0 !important;
+    padding: 20px var(--gut) 28px !important;
+    height: calc(100dvh - 60px) !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    background: radial-gradient(circle at top right, rgba(255, 206, 0, 0.04) 0%, rgba(12, 12, 12, 0.99) 70%) !important;
+    background: linear-gradient(
+      175deg,
+      rgba(18, 18, 18, 0.99) 0%,
+      rgba(12, 12, 12, 0.99) 100%
+    ) !important;
     overflow-y: auto !important;
+    overscroll-behavior: contain;
   }
+
+  /* Links com animação staggered */
   .mobile-nav__links {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 8px;
+    gap: 6px;
+    margin-top: 4px;
   }
+  .mobile-nav.open .mobile-nav__links a {
+    animation: gallonSlideIn .35s var(--ease) both;
+  }
+  .mobile-nav.open .mobile-nav__links a:nth-child(1) { animation-delay: .04s; }
+  .mobile-nav.open .mobile-nav__links a:nth-child(2) { animation-delay: .08s; }
+  .mobile-nav.open .mobile-nav__links a:nth-child(3) { animation-delay: .12s; }
+  .mobile-nav.open .mobile-nav__links a:nth-child(4) { animation-delay: .16s; }
+  .mobile-nav.open .mobile-nav__links a:nth-child(5) { animation-delay: .20s; }
+
   .mobile-nav a {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    font-size: 1.05rem !important;
+    font-size: 1rem !important;
     font-weight: 700 !important;
     text-transform: uppercase;
-    letter-spacing: .06em;
-    padding: 16px 20px !important;
+    letter-spacing: .08em;
+    padding: 15px 18px !important;
     background: rgba(255, 255, 255, 0.02) !important;
     border: 1px solid rgba(255, 255, 255, 0.04) !important;
     border-radius: 12px !important;
     color: var(--white) !important;
     text-decoration: none;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    transition: background .15s, border-color .15s, transform .1s;
     width: 100%;
     box-sizing: border-box;
     margin: 0 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
   }
   .mobile-nav a:active {
     background: rgba(255, 206, 0, 0.06) !important;
     border-color: rgba(255, 206, 0, 0.2) !important;
-    transform: scale(0.98);
+    transform: scale(.98);
   }
   .mobile-nav a.is-active {
     color: var(--yellow) !important;
     background: rgba(255, 206, 0, 0.04) !important;
-    border-color: rgba(255, 206, 0, 0.25) !important;
+    border-color: rgba(255, 206, 0, 0.18) !important;
   }
   .mobile-nav a::after {
     content: "→";
-    font-size: 1.1em;
-    color: rgba(255, 255, 255, 0.25);
-    transition: transform 0.2s, color 0.2s;
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.2);
+    transition: transform .15s, color .15s;
   }
   .mobile-nav a.is-active::after {
     color: var(--yellow);
-    transform: translateX(4px);
+    transform: translateX(3px);
   }
 
-  /* Rodapé do Menu Mobile */
+  /* Rodapé do Menu — contato rápido */
   .mobile-nav__footer {
     margin-top: auto;
-    padding-top: 24px;
+    padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
   .mobile-nav__footer-title {
-    font-size: 0.72rem;
+    font-size: .7rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: .16em;
     color: var(--gray-dim);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .mobile-nav__contact-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 18px;
+    gap: 8px;
+    margin-bottom: 14px;
   }
   .mobile-nav__contact-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 14px 10px;
-    font-size: 0.8rem;
+    padding: 13px 10px;
+    font-size: .78rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: .05em;
     border-radius: 10px;
     text-decoration: none;
-    transition: transform 0.15s, opacity 0.15s;
+    transition: transform .1s;
     box-sizing: border-box;
   }
-  .mobile-nav__contact-btn:active {
-    transform: scale(0.97);
-  }
+  .mobile-nav__contact-btn:active { transform: scale(.96); }
   .mobile-nav__contact-btn--phone {
     background: var(--char);
     border: 1px solid var(--steel);
@@ -163,153 +250,599 @@
   .mobile-nav__contact-btn--wpp {
     background: #25D366;
     color: var(--white);
+    border: 1px solid #25D366;
   }
   .mobile-nav__info {
-    font-size: 0.75rem;
+    font-size: .72rem;
     color: var(--gray-dim);
+    line-height: 1.45;
+  }
+
+
+  /* ========================================
+     HOME · HERO — compacto e impactante
+     ======================================== */
+  .hero__grid {
+    gap: 20px;
+    padding-block: 28px 0;
+  }
+  .hero .display { margin-top: 14px; }
+  .hero .lead {
+    margin-top: 14px;
+    font-size: .97rem;
     line-height: 1.5;
   }
 
-  /* ---- HOME hero ---- */
-  .hero__grid{ gap:26px; padding-block:32px 0; }
-  .hero .display{ margin-top:16px; }
-  .hero .lead{ margin-top:18px; }
-  .hero__support{ margin-top:14px; font-size:.96rem; }
-  .hero .btn-row{ margin-top:26px; }
-  .hero__media{ max-width:none; margin-top:4px; }
-  .hero__panel{ aspect-ratio:4/3; clip-path:polygon(8% 0,100% 0,100% 100%,0 100%); }
-  .hero__tag{ bottom:18px; padding:11px 16px; font-size:.8rem; }
-  .hero__strip{ margin-top:8px; }
-  .hero__strip-in{ gap:10px 26px; padding-block:15px; }
-  .hero__strip-in span{ font-size:.68rem; padding-left:16px; }
-  .hero__strip-in span::before{ width:7px; height:7px; }
+  /* ESCONDER: parágrafo redundante */
+  .hero__support { display: none !important; }
 
-  /* ---- NÚMEROS (home) ---- */
-  .nums__grid{ margin-top:26px; }
-  .numbox{ padding:26px 0 4px; }
-  .stat__num{ font-size:clamp(2.6rem,15vw,3.6rem); }
-  .stat__lab{ font-size:.9rem; }
+  .hero .btn-row { margin-top: 22px; }
 
-  /* ---- DIFERENCIAIS ---- */
-  .diffs__head{ margin-bottom:32px; }
-  .card{ padding:26px 22px; }
-
-  /* ---- QUEM ATENDEMOS ---- */
-  .serve__list li{ font-size:1.08rem; gap:16px; padding:18px 0; align-items:flex-start; }
-  .serve__plus{ width:34px; height:34px; font-size:1.2rem; }
-  .serve__left .btn{ margin-top:26px; }
-
-  /* ---- CTA band ---- */
-  .cta-band__in{ gap:24px; }
-  .cta-band__sub{ font-size:1.02rem; margin-top:14px; }
-
-  /* ================= HERO · SOBRE ================= */
-  .hero-sobre__in{ gap:26px; padding-block:34px; }
-  .hero-sobre__year{
-    font-size:44vw; right:-4%; top:26px; transform:none;
-    opacity:.08; line-height:.7;
+  /* Imagem hero — aspecto mais largo, clip sutil */
+  .hero__media { max-width: none; margin-top: 2px; }
+  .hero__panel {
+    aspect-ratio: 16 / 10;
+    clip-path: polygon(6% 0, 100% 0, 100% 100%, 0 100%);
+    border-radius: 0 0 0 0;
   }
-  .hero-sobre__card{ padding:26px 24px; }
-  .hero-sobre__card .big{ font-size:2rem; }
-  .hero-sobre__tl-in{ flex-direction:column; }
-  .hero-sobre__tl-in span{
-    flex:1 1 100%; min-width:0; border-left:0;
-    border-top:1px solid var(--steel); padding:16px 0 16px 24px;
+  .hero__tag {
+    bottom: 14px;
+    padding: 10px 14px;
+    font-size: .76rem;
+    border-radius: 0;
   }
-  .hero-sobre__tl-in span:first-child{ border-top:0; }
-  .hero-sobre__tl-in span::before{ left:0; }
 
-  /* ================= HERO · PRODUTO (pdp) ================= */
-  .pdp__in{ gap:26px; padding-block:34px; }
-  .pdp__info{ max-width:none; }
-  .pdp__title{ line-height:.96; }
-  .pdp__specs{ flex-direction:column; }
-  .pdp__specs > div{
-    flex:1 1 100%; border-left:0; padding:16px 0;
-    border-top:1px solid var(--steel);
+  /* Strip horizontal compacta */
+  .hero__strip { margin-top: 6px; }
+  .hero__strip-in {
+    gap: 8px 22px;
+    padding-block: 12px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-  .pdp__specs > div:first-child{ border-top:0; padding-top:2px; }
-  .pdp__cta{ gap:18px; margin-top:28px; }
-  .pdp__cta .btn{ width:100%; }
-  .pdp__link{ width:100%; text-align:center; }
-  .pdp__media{ order:2; aspect-ratio:4/3; }
-  .pdp__media::before{ width:60px; height:60px; }
+  .hero__strip-in::-webkit-scrollbar { display: none; }
+  .hero__strip-in span {
+    font-size: .66rem;
+    padding-left: 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .hero__strip-in span::before { width: 6px; height: 6px; }
 
-  /* processo / passos + aplicações */
-  .step{ grid-template-columns:auto 1fr; gap:16px; padding:24px 0; }
-  .step__n{ font-size:2.6rem; }
-  .appcard{ padding:28px 24px; }
-  .feat{ gap:16px; padding:22px 0; }
-  .feat__mark{ width:40px; height:40px; font-size:1.3rem; }
 
-  /* ================= HERO · DEPOIMENTOS ================= */
-  .hero-dep__in{ gap:24px; padding-block:34px 6px; }
-  .hero-dep__txt{ max-width:none; }
-  .hero-dep__mark{ font-size:34vw; top:-2%; right:2%; opacity:.07; }
-  .hero-dep__trust{ margin-top:24px; }
-  .hero-dep__pull{ padding:30px 26px; animation:none; }
-  .hero-dep__pull blockquote{ font-size:1.3rem; }
-  .hero-dep__pull::after{ width:40px; height:40px; }
+  /* ========================================
+     NÚMEROS — grid 2×2 compacto
+     ======================================== */
+  .nums__grid {
+    margin-top: 20px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+    border-top: 3px solid var(--yellow);
+  }
+  .numbox {
+    padding: 22px 16px 6px;
+    border-left: 1px solid var(--steel);
+    border-bottom: 1px solid var(--steel);
+  }
+  .numbox:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .numbox:nth-child(n+3) { border-bottom: 0; }
+  .stat__num { font-size: clamp(2.2rem, 12vw, 3rem); }
+  .stat__lab { font-size: .82rem; letter-spacing: .03em; }
 
-  /* cards de depoimento + credibilidade */
-  .tcard{ padding:28px 24px; gap:18px; }
-  .tcard__q{ font-size:1.1rem; }
-  .credcard{ padding:22px 22px; gap:14px; }
-  .credcard p{ font-size:1rem; }
 
-  /* ================= ÁREA DE ATUAÇÃO ================= */
-  .area-hero__in{ padding-block:34px; }
-  .area-hero__wm{ height:auto; width:150%; right:-40%; opacity:.045; }
+  /* ========================================
+     DIFERENCIAIS — condensados a 3 cards
+     ======================================== */
+  .diffs__head { margin-bottom: 22px; }
 
-  .areamap__wrap{ gap:20px; }
-  .areamap__side{ order:-1; padding:26px 24px 22px; }
-  .areamap__count{ font-size:3.4rem; }
-  .areamap__cities{ gap:7px; }
-  .areamap__city{ font-size:.88rem; padding:8px 12px; }
-  .areamap__note{ padding-top:20px; }
+  /* ESCONDER: parágrafo introdutório longo */
+  .diffs__intro { display: none !important; }
 
-  /* MAPA SVG: os rótulos ficariam ilegíveis reduzidos — viram diagrama
-     visual (base + rotas + pins) e os NOMES vivem nos chips acima. */
-  .areamap__panel{ min-height:0; }
+  /* ESCONDER: cards 4, 5, 6 — manter apenas os 3 mais impactantes */
+  .diffs__grid .card:nth-child(n+4) { display: none !important; }
+
+  .card {
+    padding: 22px 20px;
+  }
+  .card h3 { margin-block: 10px 8px; font-size: 1.05rem; }
+  .card .body { font-size: .93rem; }
+  .card__n { font-size: .75rem; }
+
+
+  /* ========================================
+     QUEM ATENDEMOS — lista enxuta
+     ======================================== */
+  .serve__grid { gap: 24px; }
+
+  /* ESCONDER: parágrafo descritivo — título já comunica */
+  .serve__left .body { display: none !important; }
+
+  .serve__left .btn { margin-top: 20px; }
+  .serve__list li {
+    font-size: 1.02rem;
+    gap: 14px;
+    padding: 14px 0;
+    align-items: center;
+  }
+  .serve__plus {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+  }
+
+
+  /* ========================================
+     CTA BAND — direto ao ponto
+     ======================================== */
+  .cta-band__in { gap: 20px; text-align: center; }
+
+  /* ESCONDER: subtítulo longo */
+  .cta-band__sub { display: none !important; }
+
+  /* ESCONDER: botão secundário "Ver Depoimentos" */
+  .cta-band__in .btn-row .btn:last-child:not(:first-child) {
+    display: none !important;
+  }
+
+  .cta-band__in .btn-row { justify-content: center; }
+  .cta-band .eyebrow { justify-content: center; }
+
+
+  /* ========================================
+     FOOTER — enxuto e focado
+     ======================================== */
+  .foot-grid {
+    gap: 24px;
+    padding-block: 40px;
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ESCONDER: coluna de navegação (menu mobile já existe) */
+  .foot-col:not(.foot-contact) { display: none !important; }
+
+  /* ESCONDER: descrição longa do footer */
+  .foot-brand .body { display: none !important; }
+
+  .foot-brand img { height: 30px; margin-bottom: 0; }
+  .foot-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .foot-contact {
+    display: block !important;
+  }
+  .foot-contact h4 { text-align: center; margin-bottom: 16px; }
+  .foot-contact ul { gap: 10px; }
+  .foot-contact li { font-size: .92rem; }
+
+  .foot-bottom {
+    padding-block: 16px;
+    justify-content: center;
+    text-align: center;
+  }
+  .foot-bottom p { font-size: .76rem; }
+
+
+  /* ========================================
+     PÁGINAS INTERNAS — SOBRE
+     ======================================== */
+
+  /* Hero Sobre */
+  .hero-sobre__in {
+    gap: 22px;
+    padding-block: 30px;
+  }
+  .hero-sobre__year {
+    font-size: 38vw;
+    right: -4%;
+    top: 24px;
+    transform: none;
+    opacity: .06;
+    line-height: .7;
+  }
+  .hero-sobre__card {
+    padding: 22px 20px;
+    border-radius: 14px !important;
+  }
+  .hero-sobre__card .big { font-size: 1.85rem; }
+
+  /* Timeline compacta */
+  .hero-sobre__tl-in {
+    flex-direction: column;
+  }
+  .hero-sobre__tl-in span {
+    flex: 1 1 100%;
+    min-width: 0;
+    border-left: 0;
+    border-top: 1px solid var(--steel);
+    padding: 14px 0 14px 20px;
+    font-size: .75rem;
+  }
+  .hero-sobre__tl-in span:first-child { border-top: 0; }
+  .hero-sobre__tl-in span::before { left: 0; }
+
+  /* ESCONDER: parágrafos longos da seção história (manter só 2) */
+  .prose p:nth-child(n+3) { display: none !important; }
+
+  /* Highlight numbers compactos */
+  .hl { gap: 18px; margin-top: 24px; }
+  .hl__num { font-size: clamp(1.7rem, 8vw, 2.2rem); }
+  .hl__lab { font-size: .82rem; }
+
+  /* Statement cards (Missão/Visão) */
+  .statement { padding: 26px 22px; }
+  .statement p { font-size: 1.05rem; }
+
+  /* Values list compacta */
+  .plist li {
+    font-size: 1rem;
+    gap: 14px;
+    padding: 14px 0;
+  }
+  .plist .pl {
+    width: 30px;
+    height: 30px;
+    font-size: 1.05rem;
+    border-radius: 6px;
+  }
+
+
+  /* ========================================
+     PÁGINAS INTERNAS — PRODUTO
+     ======================================== */
+
+  /* PDP Hero */
+  .pdp__in {
+    gap: 22px;
+    padding-block: 28px;
+  }
+  .pdp__info { max-width: none; }
+  .pdp__title { line-height: .95; }
+
+  /* Specs empilhados */
+  .pdp__specs { flex-direction: column; }
+  .pdp__specs > div {
+    flex: 1 1 100%;
+    border-left: 0;
+    padding: 14px 0;
+    border-top: 1px solid var(--steel);
+  }
+  .pdp__specs > div:first-child { border-top: 0; padding-top: 2px; }
+
+  .pdp__cta { gap: 14px; margin-top: 22px; }
+  .pdp__cta .btn { width: 100%; }
+  .pdp__link { width: 100%; text-align: center; }
+
+  /* Imagem do produto */
+  .pdp__media {
+    order: 2;
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .pdp__media::before { width: 50px; height: 50px; }
+
+  /* Processo / passos */
+  .step {
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    padding: 20px 0;
+  }
+  .step__n { font-size: 2.4rem; }
+
+  /* App cards — ESCONDER cards 5 e 6 (manter 4) */
+  .appcard:nth-child(n+5) { display: none !important; }
+  .appcard {
+    padding: 24px 20px;
+    border-radius: 14px;
+  }
+
+  /* Features compactas */
+  .feat {
+    gap: 14px;
+    padding: 18px 0;
+  }
+  .feat__mark {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    border-radius: 6px;
+  }
+  .feat .body { font-size: .93rem; }
+
+  /* ESCONDER: features 5 e 6 (manter 4) */
+  .feat:nth-child(n+5) { display: none !important; }
+
+  /* Hero Produto (full-bleed) */
+  .hero-prod__in { padding-block: clamp(36px, 5vw, 64px); }
+  .hero-prod__spec-in {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-prod__spec-in > div {
+    border-left: 0 !important;
+    border-top: 1px solid var(--steel);
+    padding: 16px 20px;
+  }
+  .hero-prod__spec-in > div:first-child { border-top: 0; }
+  .hero-prod__badge { font-size: .78rem; padding: 8px 14px; }
+  .hero-prod__scroll { display: none; }
+
+  /* Breadcrumb compacto */
+  .crumbs {
+    font-size: .72rem;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+
+  /* ========================================
+     PÁGINAS INTERNAS — DEPOIMENTOS
+     ======================================== */
+
+  /* Hero depoimentos */
+  .hero-dep__in {
+    gap: 20px;
+    padding-block: 28px 6px;
+  }
+  .hero-dep__txt { max-width: none; }
+  .hero-dep__mark {
+    font-size: 30vw;
+    top: -2%;
+    right: 2%;
+    opacity: .05;
+  }
+  .hero-dep__trust {
+    margin-top: 20px;
+    gap: 12px;
+  }
+  .hero-dep__trust span {
+    border-left: 0;
+    padding-left: 0;
+    font-size: .85rem;
+  }
+
+  /* Pull-quote compacto — sem animação */
+  .hero-dep__pull {
+    padding: 26px 22px;
+    animation: none !important;
+    border-radius: 14px;
+  }
+  .hero-dep__pull blockquote { font-size: 1.2rem; }
+  .hero-dep__pull::after { width: 36px; height: 36px; }
+  .hero-dep__pull .qm { font-size: 3.4rem; }
+  .hero-dep__pull .by { padding-top: 16px; margin-top: 20px; gap: 10px; }
+  .hero-dep__pull .by img { width: 38px; height: 38px; }
+  .hero-dep__pull .by b { font-size: .92rem; }
+
+  /* ESCONDER: seção de reforço (redundante com hero) */
+  .hero-dep + .section--tight { display: none !important; }
+
+  /* Testimonial cards compactos */
+  .tcard {
+    padding: 24px 20px;
+    gap: 14px;
+    border-radius: 14px !important;
+  }
+  .tcard__q { font-size: 1.05rem; }
+  .tcard__mark { font-size: 3rem; height: 28px; }
+  .tcard__by { padding-top: 16px; }
+  .tcard__av { width: 44px; height: 44px; }
+  .tcard__name { font-size: .92rem; }
+
+  /* Credibility cards */
+  .credcard {
+    padding: 18px 18px;
+    gap: 12px;
+    border-radius: 12px !important;
+  }
+  .credcard .cm { width: 36px; height: 36px; font-size: 1.1rem; border-radius: 6px; }
+  .credcard p { font-size: .95rem; }
+
+
+  /* ========================================
+     PÁGINAS INTERNAS — ÁREA DE ATUAÇÃO
+     ======================================== */
+
+  /* Hero área */
+  .area-hero__in { padding-block: 28px; }
+  .area-hero__badge {
+    font-size: .82rem;
+    padding: 9px 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  .area-hero__wm {
+    height: auto;
+    width: 140%;
+    right: -35%;
+    opacity: .04;
+  }
+
+  /* Mapa layout */
+  .areamap__wrap { gap: 16px; }
+  .areamap__side {
+    order: -1;
+    padding: 22px 20px 18px;
+    border-radius: 14px;
+  }
+  .areamap__count { font-size: 3rem; }
+  .areamap__count-lab { font-size: .8rem; margin-top: 6px; }
+  .areamap__cities { gap: 6px; margin-top: 18px; }
+  .areamap__city {
+    font-size: .82rem;
+    padding: 7px 11px;
+    border-radius: 6px;
+  }
+  .areamap__city .cdot { width: 6px; height: 6px; }
+  .areamap__note { padding-top: 16px; }
+  .areamap__note p { font-size: .9rem; }
+  .areamap__note a { font-size: .78rem; }
+
+  /* Mapa SVG — esconder labels ilegíveis */
+  .areamap__panel {
+    min-height: 0;
+    border-radius: 14px;
+    overflow: hidden;
+  }
   .areamap__svg .plabel,
-  .areamap__svg .mp-oceanlbl{ display:none; }
-  .mp-base .blabel{ font-size:20px; }
-  .mp-base .bsub{ font-size:16px; }
-  .pin .pdot{ r:6; }
-  .pin.is-hl .pdot{ r:9; }
-  .areamap__legend{ left:14px; bottom:12px; gap:14px; font-size:.66rem; }
-
-  /* ---- FOOTER ---- */
-  .foot-grid{ gap:34px; padding-block:52px; }
-  .foot-brand img{ height:34px; }
-  .foot-bottom{ padding-block:22px; }
-  .foot-bottom p{ font-size:.8rem; }
-
-  /* ---- WhatsApp flutuante: fica compacto, não expande no toque e ganha pulso de brilho ---- */
-  @keyframes waPulse {
-    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
-    70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  .areamap__svg .mp-oceanlbl { display: none; }
+  .mp-base .blabel { font-size: 18px; }
+  .mp-base .bsub { font-size: 14px; }
+  .pin .pdot { r: 5; }
+  .pin.is-hl .pdot { r: 8; }
+  .areamap__legend {
+    left: 12px;
+    bottom: 10px;
+    gap: 12px;
+    font-size: .62rem;
   }
+
+  /* Corner ticks — esconder em mobile */
+  .corner-tick { display: none !important; }
+
+  /* Hero área (estilo antigo com ticker) */
+  .hero-area__in { padding-block: clamp(28px, 5vw, 48px); }
+  .hero-area__badge {
+    font-size: .82rem;
+    padding: 9px 14px;
+    border-radius: 8px;
+  }
+  .hero-area__ticker .tk span {
+    font-size: .78rem;
+    padding-inline: 18px;
+  }
+  .hero-area__pins i { display: none; }
+
+  /* Logística split */
+  .split,
+  .split--media { gap: 22px; }
+  .media-frame { border-radius: 10px; overflow: hidden; }
+  .media-frame__tag { font-size: .75rem; padding: 9px 14px; }
+
+
+  /* ========================================
+     COMPONENTES GENÉRICOS
+     ======================================== */
+
+  /* Watermark menos intrusivo */
+  .watermark { opacity: .025; }
+  .serve__wm { opacity: .03; }
+
+  /* Page hero interior */
+  .phero__inner { padding-block: clamp(32px, 5vw, 56px); }
+  .phero .lead { margin-top: 16px; }
+
+  /* Hazard bar mais fino */
+  .hazard { height: 8px; }
+
+  /* Eyebrow compacto */
+  .eyebrow {
+    font-size: .72rem;
+    letter-spacing: .18em;
+    gap: 10px;
+  }
+  .eyebrow::before { width: 24px; height: 2px; }
+
+  /* Notebar compacta */
+  .notebar {
+    padding: 22px 20px;
+    gap: 16px;
+    border-radius: 10px;
+  }
+  .notebar p { font-size: 1rem; }
+  .notebar .btn { margin-top: 4px; }
+
+  /* City grid / tiles */
+  .citytile {
+    padding: 18px 18px;
+    font-size: 1rem;
+    border-radius: 0;
+  }
+
+
+  /* ========================================
+     ANIMAÇÕES — desativar as pesadas
+     ======================================== */
+
+  /* Desativar Ken Burns e float (economia de bateria) */
+  .pdp__media img { animation: none !important; }
+  .hero-prod__bg img { animation: none !important; }
+  .hero-dep__pull { animation: none !important; }
+  .hero-area__pins i::before { animation: none !important; opacity: 0 !important; }
+
+  /* Ticker mais suave */
+  .hero-area__ticker .tk { animation-duration: 40s; }
+
+
+  /* ========================================
+     WHATSAPP FLOAT — compacto + pulse
+     ======================================== */
   .wa-float {
-    right: 16px;
-    bottom: 16px;
-    animation: waPulse 2s infinite;
+    right: 14px;
+    bottom: 14px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    animation: gallonWaPulse 2.2s infinite;
+    border: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   }
-  .wa-float:hover { width: 58px; }
+  .wa-float svg {
+    width: 54px;
+    height: 54px;
+    padding: 13px;
+  }
+  .wa-float:hover { width: 54px; }
   .wa-float span { display: none; }
 }
 
+
 /* ---------------------------------------------------------
-   SMALL PHONE  (≤ 380px)  — apertos finais
+   SMALL PHONE  (≤ 380px)  — ajustes finais
    --------------------------------------------------------- */
-@media (max-width:380px){
-  .display{ font-size:1.85rem; }
-  .h2{ font-size:1.5rem; }
-  .hero-sobre__card .big{ font-size:1.75rem; }
-  .pdp__title{ font-size:2.1rem; }
-  .hero-dep__pull blockquote{ font-size:1.18rem; }
-  .areamap__count{ font-size:3rem; }
-  .eyebrow{ font-size:.72rem; letter-spacing:.16em; }
-  .eyebrow::before{ width:26px; }
+@media (max-width: 380px) {
+  .display { font-size: 1.7rem; }
+  .h2 { font-size: 1.38rem; }
+  .hero-sobre__card .big { font-size: 1.6rem; }
+  .pdp__title { font-size: 1.95rem; }
+  .hero-dep__pull blockquote { font-size: 1.1rem; }
+  .areamap__count { font-size: 2.6rem; }
+  .eyebrow { font-size: .68rem; letter-spacing: .14em; }
+  .eyebrow::before { width: 20px; }
+
+  /* Números ainda mais compactos */
+  .stat__num { font-size: clamp(1.9rem, 11vw, 2.4rem); }
+  .stat__lab { font-size: .78rem; }
+
+  /* Menu links menores */
+  .mobile-nav a {
+    padding: 13px 15px !important;
+    font-size: .92rem !important;
+  }
+
+  /* Cards com padding mínimo */
+  .card { padding: 18px 16px; }
+  .tcard { padding: 20px 16px; }
+  .appcard { padding: 20px 16px; }
+  .credcard { padding: 14px 14px; }
+
+  /* Footer ultra-compacto */
+  .foot-grid { padding-block: 30px; gap: 18px; }
+  .foot-bottom p { font-size: .72rem; }
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION — respeitar preferência do sistema
+   --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav.open .mobile-nav__links a { animation: none !important; }
+  .wa-float { animation: none !important; }
+  .card:active,
+  .tcard:active { transform: none !important; }
 }
